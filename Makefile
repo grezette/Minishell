@@ -6,7 +6,7 @@ LIBFT_DIR	= ./Libft
 
 LIBFT		= $(LIBFT_DIR)libft.a
 
-SRCS		= minishell.c \
+SRCS		= ./srcs/minishell.c \
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -18,9 +18,9 @@ CC			= gcc
 
 CFLAGS		= -Wall -Wextra -Werror -g
 
-LIBS		= -L$(LIBFT_DIR) -lft
+LIBS		= -L./Libft -lft
 
-all:		= $(LIBFT) $(NAME)
+all:		 $(LIBFT) $(NAME)
 
 $(NAME)	:	$(OBJS)
 					$(CC) $(CFLAGS) $^ $(LIBS) -o $@
