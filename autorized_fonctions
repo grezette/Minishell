@@ -5,13 +5,16 @@ open	: you know how to use it;
 read	: you know how to use it;
 close	: you know how to use it;
 
-fork	: duplicate the current process, the duplicated process is called the "child process"
+fork	: duplicate the current process,
+			the duplicated process is called the "child process"
 		pid_t fork(void);
 
-wait	: suspend the execution of its calling process until a child process is finished or a signal is received
+wait	: suspend the execution of its calling process
+			until a child process is finished or a signal is received
 		pid_t wait(int *stat_loc);
 
-signal	: signals allaw the manipulation of a process from outside its domain, as well as allowing
+signal	: signals allaw the manipulation of a process from outside its domain,
+			as well as allowing
 			the process to manipulate itself or copies of itself (children)
 		sig_t signal (int sig, sig_t func);
 
@@ -21,21 +24,71 @@ kill	: sends the signal specified by sig to pid, a process or a group of process
 exit	: terminate a process
 		void exit(int status);
 
-getcwd	: copies the absolute pathname of the current workig directory into the referenced memory by buf and returns a pointer to buf.
+getcwd	: copies the absolute pathname of the current workig directory
+			into the referenced memory by buf and returns a pointer to buf.
 			The size argument is the size, in bytes, of the array referenced by buff.
 		char *getcwd(char *buf, size_t size);
 
-chdir	: the path arguments points to the pathname of a directory. It causes the named directory to become the current working directory,
-			that is, the starting point for path searches of pathnames not beginning with a slash, '/'.
+chdir	: the path arguments points to the pathname of a directory.
+			It causes the named directory to become the current working directory,
+			that is, the starting point for path searches
+				of pathnames not beginning with a slash, '/'.
 		int chdir (const char *path);
 
-stat	: obtains information about the file pointed to by path. Read, write or exectute permission of the named file is not required,
-			but all directories listed in the path name leading to the file must be serchable
+stat	: obtains information about the file pointed to by path.
+			Read, write or exectute permission of the named file is not required,
+			but all directories listed in the path name
+				leading to the file must be serchable
 		int stat(const char *restrict path, struct stat *buf);
 
-lstat	: like stat exept in the case where the named file is a symbolic link; lstat returns information about the link,
-			while stat returns information about the file the link references.
+lstat	: like stat exept in the case where the named file is a symbolic link;
+			lstat returns information about the link,
+				while stat returns information about the file the link references.
 		int lstat(const char *restrict path, struct stat *buf);
 
-fstat	: obtains te same information about an open file known by the file descriptor fildes.
+fstat	: obtains te same information about an open file
+			known by the file descriptor fildes.
 		int fstat(int fildes, struct stat *buf);
+
+execve	: transforms the calling process into a new process.
+			The new process is constructed from an ordinary file,
+			whose name is pointed to by path, called the new process file.
+		int execve(const char *path, char *const argv[], char *const envp[]);
+
+dup		: duplicates an existing file object descriptor
+			and returns its value to the calling process (fildes2 = dup(fildes)).
+			The argument fildes is a small non-negative integer index
+				in the per-process descriptor table.
+			The new descriptor returned by the call is the lowest numbered descriptor
+				currently not in use by the process.
+		int dup(int fildes);
+
+dup2	: the value  of the new descriptor fildes 2 is specified.
+			If fildes and fileds 2 are equal, then dup2 just returns fildes 2;
+			Nor other changes are made to the existing descriptor 
+		int dup2(int fildes, int fildes2);
+
+pipe	: creates a pipe (an object that allows unidirectional data flow)
+			and allocates a pair of file descriptors.
+			The first descirptor connects to the read end of the pipe;
+			the second connects to the write end.
+		int pipe(int fildes[2]);
+
+opendir	: opens the directory named by filename,
+			associates a directory stream with it
+			and returns a pointer used to identify
+			the directory stream in subsequent operation.
+		DIR *opendir(const char *filename);
+
+readdir	: returns a pointer to the next directory entry.
+			It returns NULL upon the end of the directory or on error.
+		struct dirent *readdir(DIR *dirp);
+
+closedir: closes the named directory stream and frees the structure
+			associated with the dirp pointer, returning 0 on succes.
+		int closedir(DIR *dirp);
+
+strerror: look up the error message string corresponding to an error number.
+			It accepts an error number argument errnum and returns a pointer
+			to the corresponding message string.
+		char *strerror(int errnum);
