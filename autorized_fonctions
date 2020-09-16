@@ -1,0 +1,41 @@
+malloc	: you know how to use it;
+free	: you know how to use it;
+write	: you know how to use it;
+open	: you know how to use it;
+read	: you know how to use it;
+close	: you know how to use it;
+
+fork	: duplicate the current process, the duplicated process is called the "child process"
+		pid_t fork(void);
+
+wait	: suspend the execution of its calling process until a child process is finished or a signal is received
+		pid_t wait(int *stat_loc);
+
+signal	: signals allaw the manipulation of a process from outside its domain, as well as allowing
+			the process to manipulate itself or copies of itself (children)
+		sig_t signal (int sig, sig_t func);
+
+kill	: sends the signal specified by sig to pid, a process or a group of process
+		int kill(pid_t pid, int sig);
+
+exit	: terminate a process
+		void exit(int status);
+
+getcwd	: copies the absolute pathname of the current workig directory into the referenced memory by buf and returns a pointer to buf.
+			The size argument is the size, in bytes, of the array referenced by buff.
+		char *getcwd(char *buf, size_t size);
+
+chdir	: the path arguments points to the pathname of a directory. It causes the named directory to become the current working directory,
+			that is, the starting point for path searches of pathnames not beginning with a slash, '/'.
+		int chdir (const char *path);
+
+stat	: obtains information about the file pointed to by path. Read, write or exectute permission of the named file is not required,
+			but all directories listed in the path name leading to the file must be serchable
+		int stat(const char *restrict path, struct stat *buf);
+
+lstat	: like stat exept in the case where the named file is a symbolic link; lstat returns information about the link,
+			while stat returns information about the file the link references.
+		int lstat(const char *restrict path, struct stat *buf);
+
+fstat	: obtains te same information about an open file known by the file descriptor fildes.
+		int fstat(int fildes, struct stat *buf);
